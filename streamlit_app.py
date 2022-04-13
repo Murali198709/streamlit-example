@@ -22,7 +22,15 @@ bitcoin_prices['date'] = pd.to_datetime(bitcoin_prices['date'],unit='ms')
 
 st.title("Murali Krishna Tulluri's Data mining course Assignment 6")
 
-#bitcoin_prices.plot.line(x="date",y="price")
+bitcoin_prices['date'] = pd.to_datetime(bitcoin_prices['date']).dt.date
+
+Count = bitcoin_prices["date"].nunique()
+
+
+values = st.slider(
+     'Select number of days you want to see the Bitcoin price trend and average price',
+     1, int(Count), (1, 15))
+st.write('Values:', values)
 
 Currency = st.radio(
 
@@ -30,17 +38,24 @@ Currency = st.radio(
 
     ('CAD','USD','INR'))
 
-
+bitcoin_prices['CAD_price'] = bitcoin_prices["price"]*1.26
+bitcoin_prices['INR_price'] = bitcoin_prices["price"]*76.12
 
 #specifying what should be display when the radio button is selected
 
 if Currency == 'CAD':
-
-    st.write('You select Canada')
+        
+    
+    bitcoin_prices.plot.line(x="date",y="price",label="CAD")
+    st.write('Average price during this period was '+str(bitcoin_prices['CAD_price'].mean()))
+    
 
 elif Currency == 'USD':
 
-    st.write("You selected USD.")
+    bitcoin_prices.plot.line(x="date",y="price",label="USD")
+    st.write('Average price during this period was '+str(bitcoin_prices['price'].mean()))
 else:
 
-    st.write("You INR")
+    bitcoin_prices.plot.line(x="date",y="price",label="INR")
+    st.write('Average price during this period was '+str(bitcoin_prices['INR_price'].mean()))
+    

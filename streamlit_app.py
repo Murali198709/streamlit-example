@@ -5,7 +5,7 @@ import numpy as np
 from datetime import datetime
 from sklearn import tree
 import streamlit as st
-
+import matplotlib.pyplot as plt
 
 url='https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=cad&days=90&interval=daily.json'
 
@@ -46,16 +46,16 @@ bitcoin_prices['INR_price'] = bitcoin_prices["price"]*76.12
 if Currency == 'CAD':
         
     
-    bitcoin_prices.plot.line(x="date",y="price",label="CAD")
+    bitcoin_prices.plt.line(x="date",y="price",label="CAD")
     st.write('Average price during this period was '+str(bitcoin_prices['CAD_price'].mean()))
     
 
 elif Currency == 'USD':
 
-    bitcoin_prices.plot.line(x="date",y="price",label="USD")
+    bitcoin_prices.plt.line(x="date",y="price",label="USD")
     st.write('Average price during this period was '+str(bitcoin_prices['price'].mean()))
 else:
 
-    bitcoin_prices.plot.line(x="date",y="price",label="INR")
+    bitcoin_prices.plt.line(x="date",y="price",label="INR")
     st.write('Average price during this period was '+str(bitcoin_prices['INR_price'].mean()))
     

@@ -2,7 +2,7 @@
 import requests
 import pandas as pd
 import numpy as np
-from datetime import datetime
+from datetime import datetime,timedelta
 from sklearn import tree
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -19,21 +19,19 @@ bitcoin_prices = pd.DataFrame(JSONContent['prices'],columns=['date','price'])
 
 bitcoin_prices['date'] = pd.to_datetime(bitcoin_prices['date'],unit='ms')
 
+Count = bitcoin_prices['date'].nunique()
 
 st.title("Murali Krishna Tulluri's Data mining course Assignment 6")
 
 bitcoin_prices['date'] = pd.to_datetime(bitcoin_prices['date']).dt.date
 
-Count = bitcoin_prices["date"].nunique()
+min_date = bitcoin_prices['date'].min()
 
+values = st.slider('Please select a range of values',1,int(Count), (0, 15))
 
-values = st.slider(
-     'Select number of days you want to see the Bitcoin price trend and average price',
-     1, int(Count), (1, 15))
+end_date = min_date + timedelta(days=int(values[1]))
 
-
-bitcoin_prices=bitcoin_prices[pd.to_numeric(bitcoin_prices.CAD_price)<=int(values[1])]
-bitcoin_prices=bitcoin_prices[pd.to_numeric(bitcoin_prices.CAD_price)>=int(values[0])]
+bitcoin_prices=bitcoin_prices[bitcoin_prices['date']<=end_date]
 
 Currency = st.radio(
 

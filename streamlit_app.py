@@ -23,11 +23,10 @@ Count = bitcoin_prices['date'].nunique()
 
 st.title("Murali Krishna Tulluri's Data mining course Assignment 6")
 
-bitcoin_prices['date'] = pd.to_datetime(bitcoin_prices['date']).dt.date
 
 min_date = bitcoin_prices['date'].min()
 
-values = st.slider('Please select a range of values',1,int(Count), (0, 15))
+values = st.slider('Please select a range of values',1,int(Count), (1, 15))
 
 end_date = min_date + timedelta(days=int(values[1]))
 

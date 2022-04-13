@@ -24,7 +24,7 @@ Currency = st.radio(
     ('CAD','USD','INR'))
 
 
-url="https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency="+Currency+"&days="+values[1]+"&interval=daily.json"
+url="https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency="+Currency+"&days="+str(values[1])+"&interval=daily.json"
 
 JSONContent = requests.get(url).json()
 
@@ -37,8 +37,8 @@ bitcoin_prices['date'] = pd.to_datetime(bitcoin_prices['date'],unit='ms')
 bitcoin_prices = bitcoin_prices.set_index('date')
 
 
-st.line_chart(bitcoin_prices.Currency)
-st.write('Average price during this period was '+str(bitcoin_prices.CAD.mean())+Currency)
+st.line_chart(bitcoin_prices[Currency])
+st.write('Average price during this period was '+str(bitcoin_prices[Currency].mean())+Currency)
     
 
    

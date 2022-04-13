@@ -28,7 +28,7 @@ min_date = bitcoin_prices['date'].min()
 
 values = st.slider('Please select a range of values',1,int(Count), (1, 15))
 st.write('Values selected: ', values)
-
+st.write(Count)
 end_date = min_date + timedelta(days=int(values[1]))
 
 bitcoin_prices=bitcoin_prices[bitcoin_prices['date']<=end_date]

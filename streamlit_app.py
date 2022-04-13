@@ -35,7 +35,7 @@ bitcoin_prices = pd.DataFrame(JSONContent['prices'],columns=['date','price'])
 bitcoin_prices['date'] = pd.to_datetime(bitcoin_prices['date'],unit='ms')
 
 
-st.Title("Murali Krishna Tulluri's Data mining course Assignment 6")
+st.title("Murali Krishna Tulluri's Data mining course Assignment 6")
 
 bitcoin_prices.plot.line(x="date",y="price")
 

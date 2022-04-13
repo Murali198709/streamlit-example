@@ -52,11 +52,11 @@ if Currency == 'CAD':
 
 elif Currency == 'USD':
 
-    st.line_chart(bitcoin_prices[["date","price"]])
+    st.line_chart(bitcoin_prices['CAD_price'])
     st.write('Average price during this period was '+str(bitcoin_prices['price'].mean()))
 else:
 
-    st.line_chart(bitcoin_prices[["date","INR_price"]])
+    st.line_chart(bitcoin_prices['CAD_price'])
     st.write('Average price during this period was '+str(bitcoin_prices['INR_price'].mean()))
 
 

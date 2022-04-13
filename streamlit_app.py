@@ -28,8 +28,10 @@ values = st.slider('Please select a range of values',1,91, (1, 70))
 #st.write('Values selected: ', values)
 #st.write(Count)
 end_date = min_date + timedelta(days=int(values[1]))
+start_date = min_date + timedelta(days=int(values[0]))
 
 bitcoin_prices=bitcoin_prices[bitcoin_prices['date']<=end_date]
+bitcoin_prices=bitcoin_prices[bitcoin_prices['date']>=start_date]
 
 Currency = st.radio(
 

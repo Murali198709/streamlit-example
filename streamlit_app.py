@@ -43,19 +43,23 @@ bitcoin_prices['INR_price'] = bitcoin_prices["price"]*76.12
 
 #specifying what should be display when the radio button is selected
 
+
+
 if Currency == 'CAD':
         
     
-    bitcoin_prices.plt.line(x="date",y="price",label="CAD")
+    st.line_chart(bitcoin_prices[["date","CAD_price"]])
     st.write('Average price during this period was '+str(bitcoin_prices['CAD_price'].mean()))
     
 
 elif Currency == 'USD':
 
-    bitcoin_prices.plt.line(x="date",y="price",label="USD")
+    st.line_chart(bitcoin_prices[["date","price"]])
     st.write('Average price during this period was '+str(bitcoin_prices['price'].mean()))
 else:
 
-    bitcoin_prices.plt.line(x="date",y="price",label="INR")
+    st.line_chart(bitcoin_prices[["date","INR_price"]])
     st.write('Average price during this period was '+str(bitcoin_prices['INR_price'].mean()))
-    
+
+
+   

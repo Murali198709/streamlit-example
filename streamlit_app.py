@@ -27,6 +27,7 @@ st.title("Murali Krishna Tulluri's Data mining course Assignment 6")
 min_date = bitcoin_prices['date'].min()
 
 values = st.slider('Please select a range of values',1,int(Count), (1, 15))
+st.write('Values selected: ', values)
 
 end_date = min_date + timedelta(days=int(values[1]))
 

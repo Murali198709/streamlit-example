@@ -29,7 +29,7 @@ Count = bitcoin_prices["date"].nunique()
 
 values = st.slider(
      'Select number of days you want to see the Bitcoin price trend and average price',
-     1, Count, (1, 15))
+     1, int(Count), (1, 15))
 
 
 bitcoin_prices=bitcoin_prices[pd.to_numeric(bitcoin_prices.CAD_price)<=int(values[1])]

@@ -7,31 +7,15 @@ from sklearn import tree
 import streamlit as st
 import matplotlib.pyplot as plt
 
-url='https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=cad&days=365&interval=daily.json'
-
-JSONContent = requests.get(url).json()
 
 
-bitcoin_prices = pd.DataFrame(JSONContent['prices'],columns=['date','price'])
 
-
-bitcoin_prices['date'] = pd.to_datetime(bitcoin_prices['date'],unit='ms')
-
-Count = bitcoin_prices['date'].nunique()
 
 st.title("Murali Krishna Tulluri's Data mining course Assignment 6")
 
 
-min_date = bitcoin_prices['date'].min()
-
 values = st.slider('Please select a range of values',1,365, (1, 90))
-#st.write('Values selected: ', values)
-#st.write(Count)
-end_date = min_date + timedelta(days=int(values[1]))
-start_date = min_date + timedelta(days=int(values[0]))
 
-bitcoin_prices=bitcoin_prices[bitcoin_prices['date']<=end_date]
-bitcoin_prices=bitcoin_prices[bitcoin_prices['date']>=start_date]
 
 Currency = st.radio(
 
@@ -39,28 +23,22 @@ Currency = st.radio(
 
     ('CAD','USD','INR'))
 
-bitcoin_prices['CAD'] = bitcoin_prices["price"]*1.26
-bitcoin_prices['INR'] = bitcoin_prices["price"]*76.12
-bitcoin_prices['USD'] = bitcoin_prices["price"]*1
+
+url="https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency="+Currency+"&days="+values[1]+"&interval=daily.json"
+
+JSONContent = requests.get(url).json()
+
+
+bitcoin_prices = pd.DataFrame(JSONContent['prices'],columns=['date',Currency])
+
+bitcoin_prices['date'] = pd.to_datetime(bitcoin_prices['date'],unit='ms')
+
 
 bitcoin_prices = bitcoin_prices.set_index('date')
 
-if Currency == 'CAD':
-        
 
+st.line_chart(bitcoin_prices.Currency)
+st.write('Average price during this period was '+str(bitcoin_prices.CAD.mean())+Currency)
     
-    st.line_chart(bitcoin_prices['CAD'])
-    st.write('Average price during this period was '+str(bitcoin_prices['CAD'].mean())+' CAD')
-    
-
-elif Currency == 'USD':
-
-    st.line_chart(bitcoin_prices['USD'])
-    st.write('Average price during this period was '+str(bitcoin_prices['USD'].mean())+' USD')
-else:
-
-    st.line_chart(bitcoin_prices['INR'])
-    st.write('Average price during this period was '+str(bitcoin_prices['INR'].mean())+' INR')
-
 
    

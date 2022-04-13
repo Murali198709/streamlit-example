@@ -48,7 +48,7 @@ df=bitcoin_prices.rename(columns={'date':'index'}).set_index('index')
 if Currency == 'CAD':
         
     
-    st.line_chart(df[["date","CAD_price"]])
+    st.line_chart(df[["index","CAD_price"]])
     st.write('Average price during this period was '+str(bitcoin_prices['CAD_price'].mean()))
     
 

@@ -7,7 +7,7 @@ from sklearn import tree
 import streamlit as st
 import matplotlib.pyplot as plt
 
-url='https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=cad&days=90&interval=daily.json'
+url='https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=cad&days=365&interval=daily.json'
 
 JSONContent = requests.get(url).json()
 
@@ -24,7 +24,7 @@ st.title("Murali Krishna Tulluri's Data mining course Assignment 6")
 
 min_date = bitcoin_prices['date'].min()
 
-values = st.slider('Please select a range of values',1,91, (1, 70))
+values = st.slider('Please select a range of values',1,365, (1, 90))
 #st.write('Values selected: ', values)
 #st.write(Count)
 end_date = min_date + timedelta(days=int(values[1]))

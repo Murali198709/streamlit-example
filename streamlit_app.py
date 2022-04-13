@@ -29,8 +29,11 @@ Count = bitcoin_prices["date"].nunique()
 
 values = st.slider(
      'Select number of days you want to see the Bitcoin price trend and average price',
-     1, int(Count), (1, 15))
-st.write('Values:', values)
+     1, Count, (1, 15))
+
+
+bitcoin_prices=bitcoin_prices[pd.to_numeric(bitcoin_prices.CAD_price)<=int(values[1])]
+bitcoin_prices=bitcoin_prices[pd.to_numeric(bitcoin_prices.CAD_price)>=int(values[0])]
 
 Currency = st.radio(
 
@@ -45,10 +48,9 @@ bitcoin_prices = bitcoin_prices.set_index('date')
 
 if Currency == 'CAD':
         
-    df=bitcoin_prices[pd.to_numeric(bitcoin_prices.CAD_price)<=int(values[1])]
-    df=df[pd.to_numeric(df.CAD_price)>=int(values[0])]
+
     
-    st.line_chart(df['CAD_price'])
+    st.line_chart(bitcoin_prices['CAD_price'])
     st.write('Average price during this period was '+str(bitcoin_prices['CAD_price'].mean())+' CAD')
     
 

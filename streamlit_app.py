@@ -39,8 +39,9 @@ Currency = st.radio(
 
     ('CAD','USD','INR'))
 
-bitcoin_prices['CAD_price'] = bitcoin_prices["price"]*1.26
-bitcoin_prices['INR_price'] = bitcoin_prices["price"]*76.12
+bitcoin_prices['CAD'] = bitcoin_prices["price"]*1.26
+bitcoin_prices['INR'] = bitcoin_prices["price"]*76.12
+bitcoin_prices['USD'] = bitcoin_prices["price"]*1
 
 bitcoin_prices = bitcoin_prices.set_index('date')
 
@@ -48,17 +49,17 @@ if Currency == 'CAD':
         
 
     
-    st.line_chart(bitcoin_prices['CAD_price'])
+    st.line_chart(bitcoin_prices['CAD'])
     st.write('Average price during this period was '+str(bitcoin_prices['CAD'].mean())+' CAD')
     
 
 elif Currency == 'USD':
 
-    st.line_chart(bitcoin_prices['price'])
+    st.line_chart(bitcoin_prices['USD'])
     st.write('Average price during this period was '+str(bitcoin_prices['USD'].mean())+' USD')
 else:
 
-    st.line_chart(bitcoin_prices['INR_price'])
+    st.line_chart(bitcoin_prices['INR'])
     st.write('Average price during this period was '+str(bitcoin_prices['INR'].mean())+' INR')
 
 

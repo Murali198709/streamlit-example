@@ -33,6 +33,9 @@ bitcoin_prices = pd.DataFrame(JSONContent['prices'],columns=['date',Currency])
 
 bitcoin_prices['date'] = pd.to_datetime(bitcoin_prices['date'],unit='ms')
 
+start_date = bitcoin_prices['date'].min()+timedelta(days=values[0])
+
+bitcoin_prices = bitcoin_prices[bitcoin_prices['date']>=start_date]
 
 bitcoin_prices = bitcoin_prices.set_index('date')
 

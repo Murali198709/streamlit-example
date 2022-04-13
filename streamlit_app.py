@@ -41,14 +41,12 @@ Currency = st.radio(
 bitcoin_prices['CAD_price'] = bitcoin_prices["price"]*1.26
 bitcoin_prices['INR_price'] = bitcoin_prices["price"]*76.12
 
-#specifying what should be display when the radio button is selected
-
-df = pd.read_csv(bitcoin_prices, index_col=0, parse_dates=True)
+bitcoin_prices = bitcoin_prices.set_index('date')
 
 if Currency == 'CAD':
         
     
-    st.line_chart(df['CAD_price'])
+    st.line_chart(bitcoin_prices[['date','CAD_price']])
     st.write('Average price during this period was '+str(bitcoin_prices['CAD_price'].mean()))
     
 

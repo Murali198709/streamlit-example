@@ -1,8 +1,11 @@
-from collections import namedtuple
-import altair as alt
-import math
+
+import requests
 import pandas as pd
+import numpy as np
+from datetime import datetime
+from sklearn import tree
 import streamlit as st
+
 
 """
 # Welcome to Streamlit!
@@ -16,23 +19,23 @@ In the meantime, below is an example of what you can do with just a few lines of
 """
 
 
-with st.echo(code_location='below'):
-    total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
-    num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
 
-    Point = namedtuple('Point', 'x y')
-    data = []
 
-    points_per_turn = total_points / num_turns
 
-    for curr_point_num in range(total_points):
-        curr_turn, i = divmod(curr_point_num, points_per_turn)
-        angle = (curr_turn + 1) * 2 * math.pi * i / points_per_turn
-        radius = curr_point_num / total_points
-        x = radius * math.cos(angle)
-        y = radius * math.sin(angle)
-        data.append(Point(x, y))
+url='https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=cad&days=90&interval=daily.json'
 
-    st.altair_chart(alt.Chart(pd.DataFrame(data), height=500, width=500)
-        .mark_circle(color='#0068c9', opacity=0.5)
-        .encode(x='x:Q', y='y:Q'))
+JSONContent = requests.get(url).json()
+
+
+bitcoin_prices = pd.DataFrame(JSONContent['prices'],columns=['date','price'])
+
+
+#print(bitcoin_prices.count())
+
+bitcoin_prices['date'] = pd.to_datetime(bitcoin_prices['date'],unit='ms')
+
+
+st.Title("Murali Krishna Tulluri's Data mining course Assignment 6")
+
+bitcoin_prices.plot.line(x="date",y="price")
+

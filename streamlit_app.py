@@ -48,7 +48,7 @@ bitcoin_prices['INR_price'] = bitcoin_prices["price"]*76.12
 if Currency == 'CAD':
         
     
-    st.line_chart(bitcoin_prices[["date","CAD_price"]])
+    st.line_chart(bitcoin_prices["CAD_price"])
     st.write('Average price during this period was '+str(bitcoin_prices['CAD_price'].mean()))
     
 

@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 st.title("Murali Krishna Tulluri's Data mining course Assignment 6")
 
 
-values = st.slider('Please select a range of values',1,365, (1, 90))
+values = st.slider('Please select a range of values',1,365, (15, 150))
 
 
 Currency = st.radio(
